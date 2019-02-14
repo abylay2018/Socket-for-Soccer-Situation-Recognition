@@ -20,7 +20,7 @@ sys.path.append(model_path)
 
 import resnet50
 
-host = 'localhost'
+host = '10.1.198.176'
 port = 5000
 
 detection_frequency = 30
@@ -58,8 +58,6 @@ class SceneRecognitionBlackbox:
 		#image = data
 		self.incrementFrame()
 		if self.detect:
-			#img = keras_image.load_img('/home/papa/Desktop/hub/yeldar/sp/images/Outfield/' + file, target_size=(224, 224))
-
 			x = keras_image.img_to_array(image, data_format=None)
 
 			rescale = 1. / 255
@@ -96,9 +94,7 @@ class SocketInputOutput:
 		self.socketio.emit('leave', 'SR')
 
 	def listen(self, x):
-		print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 		self.socketio.on('video_stream', x)
-		print("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww")
 		self.socketio.wait()
 
 	def send(self, data):
